@@ -430,7 +430,7 @@ export function Projects() {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
-                    className="text-muted-foreground text-xs md:text-sm h-40 md:h-fit max-h-48 pb-10 flex flex-col items-start gap-3 overflow-y-auto [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:bg-muted-foreground/25 [&::-webkit-scrollbar-thumb]:rounded-full hover:[&::-webkit-scrollbar-thumb]:bg-muted-foreground/50 [scrollbar-width:thin] [scrollbar-color:var(--border)_transparent] [-webkit-overflow-scrolling:touch]"
+                    className="text-muted-foreground text-xs md:text-sm h-40 md:h-fit max-h-48 pb-10 flex flex-col items-start gap-3 overflow-y-auto [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:bg-muted-foreground/25 [&::-webkit-scrollbar-thumb]:rounded-full hover:[&::-webkit-scrollbar-thumb]:bg-muted-foreground/50 scrollbar-thin [scrollbar-color:var(--border)_transparent] [-webkit-overflow-scrolling:touch]"
                   >
                     {(projectDetails[active.title] || active.description)
                       .split("\n\n")
