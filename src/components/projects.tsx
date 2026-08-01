@@ -206,7 +206,7 @@ const projectDetails: Record<string, string> = {
   WisePoll:
     "WisePoll was built to solve the complexities of real-time polling. The core features include poll creation with multiple single-choice questions, mandatory/optional flags, and customizable settings.\n\nRespondents can vote either anonymously or via authentication. An expiry system ensures polls automatically close, rejecting further responses. Public share links allow respondents to answer directly.\n\nLive analytics update in real-time via WebSocket (Socket.io). The dashboard features visual per-question breakdowns with option counts, percentages, and bar charts. Everything is wrapped in a responsive, dark/light theme inspired by Loid with a sage-green palette.",
   AnimeKun:
-    "AnimeKun is your ultimate anime discovery and tracking platform. Currently in active development, it aims to provide an incredibly fast, seamless, and visually rich experience for managing your watchlists.\n\nThe platform is being built from the ground up with modern tools like Next.js and Tailwind CSS to ensure rapid load times and deep SEO optimization.",
+    "AnimeKun is your ultimate anime discovery and tracking platform. Currently in active development, it aims to provide an incredibly fast, seamless, and visually rich experience for making your anime journey to a different level.",
 };
 
 const statusConfig: Record<string, string> = {
