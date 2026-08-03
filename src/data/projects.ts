@@ -11,7 +11,7 @@ export interface Project {
 export const projects: Project[] = [
   {
     title: "WisePoll",
-    description: "Smart Polling Made Simple — Create, share, and analyze polls with real-time results and rich analytics.",
+    description: "Smart Polling Made Simple - Create, share, and analyze polls with real-time results and rich analytics.",
     thumbnail: "/projects/wisepoll.png",
     githubUrl: "https://github.com/TheAdroitDev/WISE-Poll",
     liveUrl: "https://wisepoll.theadroitdev.com/",
