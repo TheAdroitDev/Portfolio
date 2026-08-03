@@ -3,8 +3,10 @@
 import { useCallback, useState, useMemo } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "framer-motion";
-import { Undo2, LinkIcon, Check } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Undo2 } from "lucide-react";
+import { HugeiconsIcon } from "@hugeicons/react";
+import { Share01Icon, Tick01Icon, Cancel01Icon } from "@hugeicons/core-free-icons";
 import type { Blog } from "@/data/blogs";
 import { CodeBlock } from "@/components/ui/code-block";
 import { ScrollProgress } from "@/components/ui/scroll-progress";
@@ -21,6 +23,7 @@ function slugify(text: string) {
 
 export function BlogContent({ blog }: { blog: Blog }) {
   const [copied, setCopied] = useState(false);
+  const [zoomedImage, setZoomedImage] = useState<{ src: string; alt: string } | null>(null);
 
   const copyLink = useCallback((event: React.MouseEvent<HTMLButtonElement>) => {
     navigator.clipboard.writeText(window.location.href);
@@ -107,7 +110,7 @@ export function BlogContent({ blog }: { blog: Blog }) {
           <h2
             key={i}
             id={slugify(text)}
-            className="mt-12 mb-4 text-lg font-semibold tracking-tight text-foreground scroll-mt-20"
+            className="mt-12 mb-8 text-lg font-semibold tracking-tight text-foreground scroll-mt-20"
           >
             {text}
           </h2>
@@ -121,7 +124,7 @@ export function BlogContent({ blog }: { blog: Blog }) {
           <h3
             key={i}
             id={slugify(text)}
-            className="mt-8 mb-3 text-base font-semibold tracking-tight text-foreground scroll-mt-20"
+            className="mt-10 mb-6 text-base font-semibold tracking-tight text-foreground scroll-mt-20"
           >
             {text}
           </h3>
@@ -137,7 +140,7 @@ export function BlogContent({ blog }: { blog: Blog }) {
         elements.push(
           <ListTag
             key={i}
-            className={`my-4 space-y-2 pl-6 ${isOrdered ? "list-decimal" : "list-disc"} text-foreground/80`}
+            className={`my-6 space-y-4.5 pl-6 ${isOrdered ? "list-decimal" : "list-disc"} text-foreground/80`}
           >
             {items.map((item, j) => {
               const text = item.replace(/^\d+\.\s+|^[-\*]\s+/, "");
@@ -173,12 +176,16 @@ export function BlogContent({ blog }: { blog: Blog }) {
         const alt = imgMatch[1];
         const src = imgMatch[2].split(" ")[0];
         elements.push(
-          <figure key={i} className="my-12 overflow-hidden rounded-xl border border-border/40 bg-muted/10 p-1.5 shadow-sm">
+          <figure
+            key={i}
+            className="my-12 overflow-hidden rounded-xl border border-border/40 bg-muted/10 p-1.5 shadow-sm cursor-zoom-in group transition-all hover:border-border/80"
+            onClick={() => setZoomedImage({ src, alt: alt || "Blog diagram" })}
+          >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={src}
               alt={alt || "Blog diagram"}
-              className="w-full h-auto object-cover rounded-lg"
+              className="w-full h-auto object-cover rounded-lg transition-transform duration-300 group-hover:scale-[1.01]"
             />
             {alt && (
               <figcaption className="mt-2.5 text-center text-xs text-muted-foreground pb-1 font-sans">{alt}</figcaption>
@@ -227,6 +234,66 @@ export function BlogContent({ blog }: { blog: Blog }) {
           );
           continue;
         }
+      }
+
+      // Blockquotes: > text
+      if (block.trim().startsWith(">")) {
+        const raw = block.trim().replace(/^>\s*/, "");
+        let text = raw;
+        let author = "";
+
+        if (raw.includes(" - ")) {
+          const parts = raw.split(" - ");
+          text = parts[0].trim();
+          author = parts.slice(1).join(" - ").trim();
+        } else if (raw.includes(" -- ")) {
+          const parts = raw.split(" -- ");
+          text = parts[0].trim();
+          author = parts.slice(1).join(" -- ").trim();
+        }
+
+        // Clean quotes wrapping
+        let cleanText = text.replace(/^[“"]|[”"]$/g, "").trim();
+
+        const renderQuoteSegments = (str: string) => {
+          return str.split(/(\*[^*]+\*|\_[^_]+\_|\*\*[^*]+\*\*)/).map((seg, idx) => {
+            if (
+              (seg.startsWith("*") && seg.endsWith("*") && !seg.startsWith("**")) ||
+              (seg.startsWith("_") && seg.endsWith("_"))
+            ) {
+              return <em key={idx} className="italic">{seg.slice(1, -1)}</em>;
+            }
+            if (seg.startsWith("**") && seg.endsWith("**")) {
+              return <strong key={idx} className="font-semibold">{seg.slice(2, -2)}</strong>;
+            }
+            return <span key={idx}>{seg}</span>;
+          });
+        };
+
+        elements.push(
+          <blockquote key={i} className="my-12 space-y-4 px-2 sm:px-4">
+            <div className="relative py-1">
+              <span className="text-5xl sm:text-6xl text-foreground/40 font-[family-name:var(--font-instrument)] select-none leading-none inline-block align-top -mt-2 mr-1">
+                “
+              </span>
+              <span className="text-2xl sm:text-3xl font-[family-name:var(--font-instrument)] leading-relaxed tracking-wide text-foreground/90 font-normal">
+                {renderQuoteSegments(cleanText)}
+              </span>
+              <span className="text-5xl sm:text-6xl text-foreground/40 font-[family-name:var(--font-instrument)] select-none leading-none inline-block align-sub ml-1">
+                ”
+              </span>
+            </div>
+            {author && (
+              <div className="flex items-center justify-end gap-3 pt-2">
+                <div className="h-[1px] w-24 sm:w-48 bg-border/40" />
+                <span className="text-xs sm:text-sm font-sans font-medium text-muted-foreground/80">
+                  {author}
+                </span>
+              </div>
+            )}
+          </blockquote>
+        );
+        continue;
       }
 
       // Regular paragraphs — handle inline `code` and **bold**
@@ -283,7 +350,10 @@ export function BlogContent({ blog }: { blog: Blog }) {
           </div>
 
           {/* Thumbnail */}
-          <div className="overflow-hidden rounded-xl">
+          <div
+            className="overflow-hidden rounded-xl cursor-zoom-in transition-all hover:opacity-95"
+            onClick={() => setZoomedImage({ src: blog.thumbnail, alt: blog.title })}
+          >
             <Image
               src={blog.thumbnail}
               alt={blog.title}
@@ -315,12 +385,12 @@ export function BlogContent({ blog }: { blog: Blog }) {
               >
                 {copied ? (
                   <>
-                    <Check size={14} className="text-emerald-500" />
+                    <HugeiconsIcon icon={Tick01Icon} size={14} className="text-emerald-500" />
                     Copied!
                   </>
                 ) : (
                   <>
-                    <LinkIcon size={14} />
+                    <HugeiconsIcon icon={Share01Icon} size={14} />
                     Share
                   </>
                 )}
@@ -348,6 +418,46 @@ export function BlogContent({ blog }: { blog: Blog }) {
         position="bottom"
         height="80px"
       />
+
+      {/* Image Zoom Modal — z-[150] so backdrop blurs everything except ScrollProgress (z-200) */}
+      <AnimatePresence>
+        {zoomedImage && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 z-150 flex items-center justify-center bg-background/80 backdrop-blur-md p-4 sm:p-8 cursor-zoom-out"
+            onClick={() => setZoomedImage(null)}
+          >
+            {/* Top-right close button */}
+            <button
+              type="button"
+              onClick={() => setZoomedImage(null)}
+              className="absolute top-6 right-6 z-160 flex items-center justify-center rounded-full bg-muted/80 p-2.5 text-foreground/80 hover:bg-muted hover:text-foreground transition-all duration-200 shadow-md border border-border/50"
+              aria-label="Close zoomed image"
+            >
+              <HugeiconsIcon icon={Cancel01Icon} size={20} />
+            </button>
+
+            <motion.div
+              initial={{ opacity: 0, scale: 0.92 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.92 }}
+              transition={{ duration: 0.25, ease: "easeOut" }}
+              className="relative max-w-4xl max-h-[85vh] overflow-hidden rounded-2xl border border-border/60 bg-card p-2 shadow-2xl cursor-default"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={zoomedImage.src}
+                alt={zoomedImage.alt}
+                className="max-h-[80vh] w-auto max-w-full rounded-xl object-contain"
+              />
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 }
