@@ -26,7 +26,7 @@ export default function BlogListPage() {
             <h1 className="text-2xl font-semibold tracking-tight text-foreground">
               Blogs
             </h1>
-            <p className="mt-2 text-md text-muted-foreground font-[family-name:var(--font-baloo)]">
+            <p className="mt-2 text-md text-muted-foreground">
               Writing about code, architecture, and lessons learned along the
               way.
             </p>
