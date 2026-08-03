@@ -106,7 +106,7 @@ export default function BlogListPage() {
           </div>
         </div>
       </main>
-      <div className="mx-auto w-full max-w-[768px] px-6 pb-20">
+      <div className="mx-auto w-full max-w-3xl px-6 pb-20">
         <Footer />
       </div>
 
