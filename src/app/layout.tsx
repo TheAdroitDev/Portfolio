@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import Script from "next/script";
-import { Geist, Schibsted_Grotesk, Baloo_Bhaijaan_2 } from "next/font/google";
+import { Inter, Schibsted_Grotesk, Baloo_Bhaijaan_2, Instrument_Serif } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 
-const geist = Geist({
+const inter = Inter({
   subsets: ["latin"],
   variable: "--font-sans",
 });
@@ -18,6 +18,12 @@ const schibstedGrotesk = Schibsted_Grotesk({
 const baloo = Baloo_Bhaijaan_2({
   subsets: ["latin"],
   variable: "--font-baloo",
+});
+
+const instrumentSerif = Instrument_Serif({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-instrument",
 });
 
 export const metadata: Metadata = {
@@ -45,7 +51,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={cn(geist.variable, schibstedGrotesk.variable, baloo.variable, "font-sans")}
+      className={cn(inter.variable, schibstedGrotesk.variable, baloo.variable, instrumentSerif.variable, "font-sans")}
       suppressHydrationWarning
     >
       <body className="min-h-screen bg-background text-foreground antialiased">
