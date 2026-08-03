@@ -22,7 +22,7 @@ export function Blogs() {
         <h2 className="text-xl font-semibold tracking-tight text-foreground">
           Blogs
         </h2>
-        <p className="mt-1 text-md text-muted-foreground font-(family-name:--font-baloo)">
+        <p className="mt-1 text-md text-muted-foreground">
           Writing about code, architecture, and lessons learned.
         </p>
       </motion.div>
