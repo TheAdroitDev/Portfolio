@@ -209,7 +209,7 @@ const ScrollProgress = ({
       <div
         ref={rootRef}
         data-slot="scroll-progress"
-        className={cn("fixed bottom-5 left-1/2 z-[200] -translate-x-1/2", className)}
+        className={cn("fixed bottom-5 left-1/2 z-200 -translate-x-1/2", className)}
         {...props}
       >
         <div className="pointer-events-none invisible absolute" aria-hidden>
