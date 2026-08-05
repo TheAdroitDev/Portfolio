@@ -215,12 +215,12 @@ const ScrollProgress = ({
         <div className="pointer-events-none invisible absolute" aria-hidden>
           <div
             ref={collapsedRef}
-            className="inline-flex items-center gap-2.5 py-2 pl-3 pr-4 max-w-[220px] sm:max-w-[260px]"
+            className="inline-flex items-center gap-2.5 py-2 pl-3 pr-4 max-w-55 sm:max-w-[260px]"
           >
             <span className="h-5 w-5 shrink-0" />
             <span
               ref={labelRef}
-              className="block max-w-[150px] sm:max-w-[190px] truncate text-xs sm:text-sm font-medium leading-none"
+              className="block max-w-37.5 sm:max-w-[190px] truncate text-xs sm:text-sm font-medium leading-none"
             >
               {label}
             </span>
