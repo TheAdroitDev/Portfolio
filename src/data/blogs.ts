@@ -173,8 +173,6 @@ You should be approachable with a single click.
 
 Don't make the recruiter wait or click on some email address for them to draft an email.
 
----
-
 ## Conclusion
 
 It's providing, value, story-telling, and positioning.
