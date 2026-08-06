@@ -21,6 +21,62 @@ function slugify(text: string) {
     .replace(/(^-|-$)/g, "");
 }
 
+function parseInlineContent(text: string) {
+  const regex = /(\[[^\]]+\]\([^)]+\)|`[^`]+`|\*\*[^*]+\*\*|\*[^*]+\*|\_[^_]+\_)/g;
+  const parts = text.split(regex);
+
+  return parts.map((part, index) => {
+    // Markdown link: [text](url)
+    const linkMatch = part.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
+    if (linkMatch) {
+      const linkText = linkMatch[1];
+      const linkUrl = linkMatch[2];
+      return (
+        <a
+          key={index}
+          href={linkUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="underline decoration-dotted decoration-blue-500 underline-offset-4 text-foreground hover:text-blue-500 dark:hover:text-blue-400 font-medium transition-colors duration-200"
+        >
+          {linkText}
+        </a>
+      );
+    }
+
+    // Inline code: `code`
+    if (part.startsWith("`") && part.endsWith("`")) {
+      return (
+        <code
+          key={index}
+          className="rounded-[4px] bg-[#222222]/90 border border-neutral-700/50 px-2 py-0.5 text-[13px] font-mono text-neutral-200 dark:text-neutral-100 shadow-sm"
+        >
+          {part.slice(1, -1)}
+        </code>
+      );
+    }
+
+    // Bold text: **bold**
+    if (part.startsWith("**") && part.endsWith("**")) {
+      return (
+        <strong key={index} className="font-semibold text-foreground">
+          {part.slice(2, -2)}
+        </strong>
+      );
+    }
+
+    // Italic text: *italic* or _italic_
+    if (
+      (part.startsWith("*") && part.endsWith("*") && !part.startsWith("**")) ||
+      (part.startsWith("_") && part.endsWith("_"))
+    ) {
+      return <em key={index} className="italic">{part.slice(1, -1)}</em>;
+    }
+
+    return <span key={index}>{part}</span>;
+  });
+}
+
 export function BlogContent({ blog }: { blog: Blog }) {
   const [copied, setCopied] = useState(false);
   const [zoomedImage, setZoomedImage] = useState<{ src: string; alt: string } | null>(null);
@@ -110,7 +166,7 @@ export function BlogContent({ blog }: { blog: Blog }) {
           <h2
             key={i}
             id={slugify(text)}
-            className="mt-12 mb-8 text-lg font-semibold tracking-tight text-foreground scroll-mt-20"
+            className="mt-12 mb-8 text-xl sm:text-[22px] font-semibold tracking-tight text-foreground scroll-mt-20"
           >
             {text}
           </h2>
@@ -124,7 +180,7 @@ export function BlogContent({ blog }: { blog: Blog }) {
           <h3
             key={i}
             id={slugify(text)}
-            className="mt-10 mb-6 text-base font-semibold tracking-tight text-foreground scroll-mt-20"
+            className="mt-10 mb-6 text-lg sm:text-xl font-semibold tracking-tight text-foreground scroll-mt-20"
           >
             {text}
           </h3>
@@ -136,31 +192,53 @@ export function BlogContent({ blog }: { blog: Blog }) {
       if (block.startsWith("1. ") || block.startsWith("- ") || block.startsWith("* ")) {
         const items = block.split("\n");
         const isOrdered = block.startsWith("1. ");
-        const ListTag = isOrdered ? "ol" : "ul";
-        elements.push(
-          <ListTag
-            key={i}
-            className={`my-6 space-y-4.5 pl-6 ${isOrdered ? "list-decimal" : "list-disc"} text-foreground/80`}
-          >
-            {items.map((item, j) => {
-              const text = item.replace(/^\d+\.\s+|^[-\*]\s+/, "");
-              const parts = text.split(/\*\*(.*?)\*\*/);
-              return (
-                <li key={j} className="text-[15px] leading-relaxed">
-                  {parts.map((part, k) =>
-                    k % 2 === 1 ? (
-                      <strong key={k} className="font-semibold text-foreground">
-                        {part}
-                      </strong>
-                    ) : (
-                      <span key={k}>{part}</span>
-                    )
-                  )}
-                </li>
-              );
-            })}
-          </ListTag>
-        );
+
+        if (isOrdered) {
+          elements.push(
+            <ol key={i} className="my-6 space-y-4.5 pl-6 list-decimal text-foreground/80">
+              {items.map((item, j) => {
+                const text = item.replace(/^\d+\.\s+|^[-\*]\s+/, "");
+                return (
+                  <li key={j} className="text-[15px] leading-relaxed">
+                    {parseInlineContent(text)}
+                  </li>
+                );
+              })}
+            </ol>
+          );
+        } else {
+          elements.push(
+            <ul key={i} className="my-6 space-y-4.5 text-foreground/80">
+              {items.map((item, j) => {
+                const text = item.replace(/^\d+\.\s+|^[-\*]\s+/, "");
+                return (
+                  <li key={j} className="flex items-start gap-3 text-[15px] leading-relaxed">
+                    <span className="mt-[5px] shrink-0 select-none text-foreground/90">
+                      <svg
+                        className="w-3.5 h-3.5"
+                        viewBox="0 0 16 16"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <rect
+                          x="1.5"
+                          y="1.5"
+                          width="13"
+                          height="13"
+                          rx="4"
+                          stroke="currentColor"
+                          strokeWidth="1.6"
+                        />
+                        <circle cx="8" cy="8" r="1.8" fill="currentColor" />
+                      </svg>
+                    </span>
+                    <div className="flex-1 min-w-0">{parseInlineContent(text)}</div>
+                  </li>
+                );
+              })}
+            </ul>
+          );
+        }
         continue;
       }
 
@@ -296,29 +374,10 @@ export function BlogContent({ blog }: { blog: Blog }) {
         continue;
       }
 
-      // Regular paragraphs — handle inline `code` and **bold**
+      // Regular paragraphs — handle inline `code`, **bold**, and [links](url)
       elements.push(
         <p key={i} className="my-4 text-foreground/80 leading-[1.8]">
-          {block.split(/(`[^`]+`|\*\*[^*]+\*\*)/).map((segment, k) => {
-            if (segment.startsWith("`") && segment.endsWith("`")) {
-              return (
-                <code
-                  key={k}
-                  className="rounded-md bg-muted px-1.5 py-0.5 text-[13px] font-mono text-foreground"
-                >
-                  {segment.slice(1, -1)}
-                </code>
-              );
-            }
-            if (segment.startsWith("**") && segment.endsWith("**")) {
-              return (
-                <strong key={k} className="font-semibold text-foreground">
-                  {segment.slice(2, -2)}
-                </strong>
-              );
-            }
-            return <span key={k}>{segment}</span>;
-          })}
+          {parseInlineContent(block)}
         </p>
       );
     }
