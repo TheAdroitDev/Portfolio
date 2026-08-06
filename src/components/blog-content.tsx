@@ -244,7 +244,7 @@ export function BlogContent({ blog }: { blog: Blog }) {
 
       // Horizontal rules: * * *, * *, or ---
       if (/^(\*\s*){2,}\*?$/.test(block.trim()) || block.trim() === "---") {
-        elements.push(<hr key={i} className="my-10 border-t border-border/30" />);
+        elements.push(<hr key={i} className="my-10 border-dashed border-border/15" />);
         continue;
       }
 
