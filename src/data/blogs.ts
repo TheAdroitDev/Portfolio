@@ -175,7 +175,7 @@ Don't make the recruiter wait or click on some email address for them to draft a
 
 ## Conclusion
 
-It's providing, value, story-telling, and positioning.
+It's all providing, value, story-telling, and positioning.
 
 Treat your portfolio as a living product - polish your typography, 
 package your projects into compelling case studies, 
