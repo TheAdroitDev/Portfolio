@@ -22,8 +22,9 @@ function slugify(text: string) {
 }
 
 function parseInlineContent(text: string) {
+  const processedText = text.replace(/&nbsp;/g, "\u00A0");
   const regex = /(\[[^\]]+\]\([^)]+\)|`[^`]+`|\*\*[^*]+\*\*|\*[^*]+\*|\_[^_]+\_)/g;
-  const parts = text.split(regex);
+  const parts = processedText.split(regex);
 
   return parts.map((part, index) => {
     // Markdown link: [text](url)
