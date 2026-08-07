@@ -12,6 +12,123 @@ export interface Blog {
 
 export const blogs: Blog[] = [
   {
+    title: "Taste Can't Be Prompted: Developing Your Design Sense",
+    slug: "taste-cant-be-prompted-developing-design-sense",
+    subtitle: "Why taste is the ultimate differentiator in the age of AI and how you can cultivate it.",
+    description: "In a world where AI can generate anything, your taste is the only thing that can't be automated. Learn how to develop your design sense.",
+    date: "2026-08-07",
+    url: "https://hashnode.com/@theadroitdev",
+    readTime: "4 min read",
+    thumbnail: "/blogs/taste-cant-be-prompted/thumbnail.png",
+    content: `
+
+    This blog is heavily inspired by these people [Emil Kowalski](https://emilkowal.ski), [Ram](https://ramx.in), [Manupaaji](https://manuarora.com), [Akash Bhadange](https://www.designerdada.com/) and their tweets, blogs or videos.
+
+    Something changed in the last year, and most people haven't noticed yet.
+
+Every product now has two users: the human and the AI agent.
+
+If AI tools can generate interfaces, write code, and ship products faster than ever before...
+
+What exactly is your job?
+
+The answer is **taste**.
+
+And taste is the one thing that cannot be automated.
+
+> In a world of abundance, we treasure taste. - Anu Atluru
+
+## What is Taste?
+
+Taste isn't just about pretty colors or nice typography.
+
+It's a trained instinct. It's the collection of human qualities that work together:
+
+- **Empathy:** Understanding that the user is tired and just wants to get the job done.
+- **Craftsmanship:** Caring about the 4px padding that nobody consciously notices, but everyone feels.
+- **Judgment:** Knowing when to remove a feature that works perfectly fine because it distracts from the core experience.
+
+AI is excellent at generating options. But it is terrible at choosing between them.
+
+That choosing is what you do.
+
+## Why Does Taste Matter Now?
+
+When the first car came out, consumers didn't care about its color or silhouette because the competition was a horse.
+
+But now? Quality and details matter more than ever.
+
+The same applies to software. Simply shipping a product that works is no longer a differentiator. AI can do that.
+
+**When AI handles the functional layer, the experiential layer is all that's left to compete on.**
+
+If two apps do the exact same thing, the one that wins is the one that \`feels\` better.
+
+## How to Develop Your Taste
+
+So, how do you train this instinct?
+
+### 1. Surround Yourself with Great Work
+
+
+If you are a designer, you should be looking at great designs.
+
+Expose yourself to the best things humans have done. 
+
+> It comes down to trying to expose yourself to the best things that humans have done and then try to bring those things into what you're doing. - Steve Jobs
+
+Find tastemakers, study their work, use their apps, and read their books.
+
+**Resources to explore:**
+
+*   [Mobbin](http://mobbin.com)
+
+*   [Godly](http://godly.website)
+
+*   [Refero](http://refero.design)
+
+*   [Landingfolio](http://landingfolio.com)
+
+### 2. Think About Why You Like Something
+
+Don't just rely on gut feelings.
+
+When you see a great design, don't just say "that looks good". Ask yourself *why*.
+
+Why does this specific interaction feel smooth? Why did the creator make these choices?
+
+Analyze the patterns. Be curious. Go beyond the surface level.
+
+### 3. Practice and Iterate
+
+A designer should design. A writer should write.
+
+The things you create probably won't be good at first.
+
+But here is the secret: **That's a good sign.**
+
+It means your taste is good enough to tell that your work isn't on par yet. This is called the "Taste Gap".
+
+Don't quit. Keep creating, seek feedback, and your skills will eventually catch up to your taste.
+
+## Conclusion
+
+Every product in the market will eventually work. The functional baseline will keep rising.
+
+But the gap between "it works" and "it feels good" will only grow wider.
+
+That gap is where you live. It always has been.
+
+Cultivate your taste. It's the only thing AI can't prompt.
+
+--- 
+
+Hey, if you like this blog, share it with others and do follow me on my socials.
+
+> Thank you for reading 💖
+`,
+  },
+  {
     title: "How to Make Your Portfolio a Success",
     slug: "how-to-make-your-portfolio-a-success",
     subtitle: "Why your portfolio website isn't getting visitors or hiring managers",
