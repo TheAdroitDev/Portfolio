@@ -14,6 +14,7 @@ import {
 const navLinks = [
   { label: "3000", href: "/" },
   { label: "Brainchildren", href: "/#projects" },
+  { label: "Learnings", href: "/learnings" },
   { label: "Blogs", href: "/blog" },
 ];
 
