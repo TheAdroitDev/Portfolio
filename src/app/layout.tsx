@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Script from "next/script";
-import { Inter, Schibsted_Grotesk, Baloo_Bhaijaan_2, Instrument_Serif } from "next/font/google";
+import { Inter, Schibsted_Grotesk, Baloo_Bhaijaan_2, Instrument_Serif, Caveat } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
 import "./globals.css";
 import { cn } from "@/lib/utils";
@@ -24,6 +24,12 @@ const instrumentSerif = Instrument_Serif({
   subsets: ["latin"],
   weight: "400",
   variable: "--font-instrument",
+});
+
+const caveat = Caveat({
+  subsets: ["latin"],
+  weight: ["400", "600", "700"],
+  variable: "--font-caveat",
 });
 
 export const metadata: Metadata = {
@@ -51,7 +57,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={cn(inter.variable, schibstedGrotesk.variable, baloo.variable, instrumentSerif.variable, "font-sans")}
+      className={cn(inter.variable, schibstedGrotesk.variable, baloo.variable, instrumentSerif.variable, caveat.variable, "font-sans")}
       suppressHydrationWarning
     >
       <body className="min-h-screen bg-background text-foreground antialiased">
