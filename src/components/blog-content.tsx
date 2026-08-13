@@ -13,6 +13,7 @@ import { ScrollProgress } from "@/components/ui/scroll-progress";
 import confetti from "canvas-confetti";
 import { Footer } from "@/components/footer";
 import { ProgressiveBlur } from "@/components/ui/progressive-blur";
+import { Scales } from "@/components/ui/scales";
 
 function slugify(text: string) {
   return text
@@ -160,32 +161,39 @@ export function BlogContent({ blog }: { blog: Blog }) {
       }
 
       // Headings — add id for scroll-progress linking
-      if (block.startsWith("## ")) {
-        const rawText = block.replace(/^##\s+/, "").trim();
+      if (block.startsWith("## ") || block.startsWith("### ")) {
+        const lines = block.split("\n");
+        const headingLine = lines[0];
+        const isH2 = headingLine.startsWith("## ");
+        const rawText = headingLine.replace(/^#+\s+/, "").trim();
         const text = rawText.replace(/^\*\*(.*?)\*\*$/, "$1").replace(/\*\*/g, "");
+
         elements.push(
-          <h2
-            key={i}
-            id={slugify(text)}
-            className="mt-12 mb-8 text-xl sm:text-[22px] font-semibold tracking-tight text-foreground scroll-mt-20"
-          >
-            {text}
-          </h2>
+          isH2 ? (
+            <h2
+              key={i}
+              id={slugify(text)}
+              className="mt-12 mb-8 text-xl sm:text-[22px] font-semibold tracking-tight text-foreground scroll-mt-20"
+            >
+              {parseInlineContent(text)}
+            </h2>
+          ) : (
+            <h3
+              key={i}
+              id={slugify(text)}
+              className="mt-10 mb-6 text-lg sm:text-xl font-semibold tracking-tight text-foreground scroll-mt-20"
+            >
+              {parseInlineContent(text)}
+            </h3>
+          )
         );
-        continue;
-      }
-      if (block.startsWith("### ")) {
-        const rawText = block.replace(/^###\s+/, "").trim();
-        const text = rawText.replace(/^\*\*(.*?)\*\*$/, "$1").replace(/\*\*/g, "");
-        elements.push(
-          <h3
-            key={i}
-            id={slugify(text)}
-            className="mt-10 mb-6 text-lg sm:text-xl font-semibold tracking-tight text-foreground scroll-mt-20"
-          >
-            {text}
-          </h3>
-        );
+
+        if (lines.length > 1) {
+          const remaining = lines.slice(1).join("\n").trim();
+          if (remaining) {
+            elements.push(...renderContent(remaining));
+          }
+        }
         continue;
       }
 
@@ -257,17 +265,44 @@ export function BlogContent({ blog }: { blog: Blog }) {
         elements.push(
           <figure
             key={i}
-            className="my-12 overflow-hidden rounded-xl border border-border/40 bg-muted/10 p-1.5 shadow-sm cursor-zoom-in group transition-all hover:border-border/80"
+            className="my-10 flex flex-col items-center justify-center cursor-zoom-in group select-none"
             onClick={() => setZoomedImage({ src, alt: alt || "Blog diagram" })}
           >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={src}
-              alt={alt || "Blog diagram"}
-              className="w-full h-auto object-cover rounded-lg transition-transform duration-300 group-hover:scale-[1.01]"
-            />
+            {/* Image Card Container with subtle Scales pattern border */}
+            <div className="relative w-full rounded-xl bg-card border border-border/40 p-1 shadow-sm transition-colors hover:border-border/70">
+              {/* Left Scales Strip */}
+              <div className="absolute -inset-y-3 -left-3 w-4 pointer-events-none opacity-50 overflow-hidden rounded-l-lg">
+                <Scales size={8} />
+              </div>
+              {/* Right Scales Strip */}
+              <div className="absolute -inset-y-3 -right-3 w-4 pointer-events-none opacity-50 overflow-hidden rounded-r-lg">
+                <Scales size={8} />
+              </div>
+              {/* Top Scales Strip */}
+              <div className="absolute -inset-x-3 -top-3 h-4 pointer-events-none opacity-50 overflow-hidden rounded-t-lg">
+                <Scales size={8} />
+              </div>
+              {/* Bottom Scales Strip */}
+              <div className="absolute -inset-x-3 -bottom-3 h-4 pointer-events-none opacity-50 overflow-hidden rounded-b-lg">
+                <Scales size={8} />
+              </div>
+
+              {/* Image Frame */}
+              <div className="relative z-10 overflow-hidden rounded-lg bg-muted/10">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={src}
+                  alt={alt || "Blog diagram"}
+                  className="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-[1.01]"
+                />
+              </div>
+            </div>
+
+            {/* Separate Caption below card */}
             {alt && (
-              <figcaption className="mt-2.5 text-center text-xs text-muted-foreground pb-1 font-sans">{alt}</figcaption>
+              <figcaption className="mt-2.5 text-center text-xs text-muted-foreground font-sans">
+                {alt}
+              </figcaption>
             )}
           </figure>
         );
