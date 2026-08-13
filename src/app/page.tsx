@@ -5,6 +5,7 @@ import { Socials } from "@/components/socials";
 import { Projects } from "@/components/projects";
 import { GitHubGraph } from "@/components/github-graph";
 import { Blogs } from "@/components/blogs";
+import { Learnings } from "@/components/learnings";
 import { Footer } from "@/components/footer";
 import { ProgressiveBlur } from "@/components/ui/progressive-blur";
 
@@ -33,6 +34,12 @@ export default function Home() {
 
           {/* Separator */}
           <hr className="border-dashed border-border/15" />
+
+          {/* Quick Learnings */}
+          <Learnings />
+
+          {/* Separator */}
+          {/* <hr className="border-dashed border-border/15" /> */}
 
           {/* Blogs */}
           <Blogs />
