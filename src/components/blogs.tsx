@@ -62,7 +62,7 @@ export function Blogs() {
                 </div>
                 <ArrowUpRight
                   size={16}
-                  className="mt-0.5 shrink-0 text-muted-foreground opacity-0 transition-all duration-200 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                  className="mt-0.5 shrink-0 text-muted-foreground opacity-60 transition-all duration-200 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
                 />
               </div>
               <p className="text-sm leading-relaxed text-muted-foreground">
