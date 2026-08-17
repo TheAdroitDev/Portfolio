@@ -33,7 +33,7 @@ export function Learnings() {
       </motion.div>
 
       <div className="space-y-3">
-        {learnings.slice(0, 3).map((item, i) => (
+        {learnings.slice(0, 2).map((item, i) => (
           <motion.div
             key={item.slug}
             initial={{ opacity: 0, y: 16 }}
@@ -111,7 +111,7 @@ export function Learnings() {
         ))}
       </div>
 
-      {learnings.length > 3 && (
+      {learnings.length > 2 && (
         <div className="pt-1 text-right">
           <Link
             href="/learnings"
