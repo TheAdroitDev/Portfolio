@@ -51,7 +51,7 @@ function parseInlineContent(text: string) {
       return (
         <code
           key={index}
-          className="rounded-[4px] bg-[#222222]/90 border border-neutral-700/50 px-2 py-0.5 text-[13px] font-mono text-neutral-200 dark:text-neutral-100 shadow-sm"
+          className="rounded-lg bg-[#222222]/90 border border-neutral-700/50 px-2 py-0.5 text-[13px] font-mono text-neutral-200 dark:text-neutral-100 shadow-sm"
         >
           {part.slice(1, -1)}
         </code>
