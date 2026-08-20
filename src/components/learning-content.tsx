@@ -229,7 +229,7 @@ export function LearningContent({ learning }: { learning: Learning }) {
                   const text = item.replace(/^\d+\.\s+|^[-\*]\s+/, "");
                   return (
                     <li key={j} className="flex items-start gap-3 text-[15px] leading-relaxed">
-                      <span className="mt-[5px] shrink-0 select-none text-foreground/90">
+                      <span className="mt-1.25 shrink-0 select-none text-foreground/90">
                         <svg
                           className="w-3.5 h-3.5"
                           viewBox="0 0 16 16"
