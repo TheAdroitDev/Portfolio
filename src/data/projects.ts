@@ -11,7 +11,7 @@ export interface Project {
 export const projects: Project[] = [
      {
         title: "Distribution Engine",
-        description: "Turn your opinions into high-engagement platform-native post",
+        description: "Turn your opinions into high-engagement platform-native posts. Distribution Engine helps turn one product or update into a repeatable distribution workflow",
         thumbnail: "/projects/distributionengine.png",
         liveUrl: "https://engine.theadroitdev.com/",
         techStack: [
