@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowUpRight, Calendar, Search } from "lucide-react";
+import { ArrowUpRight, Calendar } from "lucide-react";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { learnings } from "@/data/learnings";
@@ -16,14 +16,16 @@ export default function LearningsListPage() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
 
-  const filteredLearnings = learnings.filter((item) => {
-    const q = searchQuery.toLowerCase();
-    return (
-      item.title.toLowerCase().includes(q) ||
-      item.summary.toLowerCase().includes(q) ||
-      Boolean(item.tags?.some((tag) => tag.toLowerCase().includes(q)))
-    );
-  });
+  const filteredLearnings = [...learnings]
+    .filter((item) => {
+      const q = searchQuery.toLowerCase();
+      return (
+        item.title.toLowerCase().includes(q) ||
+        item.summary.toLowerCase().includes(q) ||
+        Boolean(item.tags?.some((tag) => tag.toLowerCase().includes(q)))
+      );
+    })
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
   return (
     <>
@@ -133,7 +135,7 @@ export default function LearningsListPage() {
 
             {filteredLearnings.length === 0 && (
               <div className="py-12 text-center text-sm text-muted-foreground">
-                No quick learnings found matching "{searchQuery}".
+                No quick learnings found matching “{searchQuery}”.
               </div>
             )}
           </div>
