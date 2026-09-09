@@ -249,7 +249,7 @@ Pick the right tool for your latency requirements and ship.
 		title: "Why Launch Posts Do Not Guarantee Distribution",
 		slug: "why-launch-posts-do-not-guarantee-distribution",
 		summary:
-			"Shipping code is just the start. A recent project launch of mine pulled in only four likes. That quiet reality check proved distribution is a long game built on consistency, patience, and handling feedback. Analyze the data, fix the pain points, and iterate forever.",
+			"Shipping code is just the start.",
 		date: "2026-09-09",
 		thumbnail: "/learnings/distribution/thumbnail.png",
 		content: `
