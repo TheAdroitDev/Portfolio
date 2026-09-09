@@ -18,4 +18,11 @@ export const INSTANTS: Instant[] = [
     caption: "Turn your opinions into high-engagement platform-native post => engine.theadroitdev.com",
     createdAt: new Date().toISOString(),
   },
+  {
+    id: "2",
+    title: "Why Launch Posts Do Not Guarantee Distribution",
+    image: "/instants/ds-problem.png",
+    caption: "Writing my learning through launch post of Distribution Engine.",
+    createdAt: new Date().toISOString(),
+  },
 ];
