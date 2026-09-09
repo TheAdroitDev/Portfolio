@@ -19,7 +19,6 @@ export const learnings: Learning[] = [
 		thumbnail: "/learnings/vertical-slice-architecture/thumbnail.png",
 		content: `
 
-
 I've built with almost every common architecture pattern:
 
 - **MVC (Model-View-Controller)**: Fast to start, but controllers quickly turn into bloated "fat controller" messes.
@@ -30,10 +29,9 @@ Layering your code by technical layers creates massive friction when shipping fa
 
 ---
 
-##  What is Vertical Slice Architecture (VSA)?
+## What is Vertical Slice Architecture (VSA)?
 
 Instead of slicing code **horizontally** (putting all controllers in one folder,
-
 all services in another, and all queries in a third), VSA slices code **vertically by feature**.
 
 Each self-contained **slice** holds everything needed for a single request:
@@ -66,7 +64,7 @@ src/
 
 ---
 
-##  Why It Works
+## Why It Works
 
 - **High Cohesion**: Everything for a feature lives in one place. No jumping between 6 folders to fix one bug.
 - **Low Coupling**: Features don't touch each other. Editing or deleting \`register\` will never break \`billing\`.
@@ -126,33 +124,28 @@ Keep features isolated, avoid premature abstraction, and ship fast.
 
 > Prisma is the "easier" tool. Drizzle is the "flexible" and "high-performance" tool.
 
-
-
 ## 1. Setup & Ease of Use
 
-Prisma wins on day one. 
+Prisma wins on day one.
 
-You run \`npx prisma init\`, write your model, run \`prisma db push\`, and you are off to the races. 
+You run \`npx prisma init\`, write your model, run \`prisma db push\`, and you are off to the races.
 
 The setup is easy and beginner-friendly.
 
-Drizzle requires a bit more boilerplate up front. 
+Drizzle requires a bit more boilerplate up front.
 
-Because of it's flexibility.
+Because of its flexibility.
 
 You have to configure your database driver (Postgres, Neon, PlanetScale, Turso) manually,
-
-set up Drizzle Kit, and wire up client files. 
+set up Drizzle Kit, and wire up client files.
 
 It takes a few extra minutes, but you gain total control over your database connection pool.
 
-
-
 ## 2. Schema Definitions
 
-With **Prisma**, your database schema lives in a custom \`.prisma\` DSL file. 
+With **Prisma**, your database schema lives in a custom \`.prisma\` DSL file.
 
-It's a tottaly different language designed by prisma
+It's a totally different language designed by Prisma.
 
 It is clean, highly readable, and handles relations out of the box:
 
@@ -177,9 +170,9 @@ export const users = pgTable("users", {
 });
 \`\`\`
 
-Drizzle requires a few more lines to define models and relations, 
+Drizzle requires a few more lines to define models and relations.
 
-However avoiding a custom schema syntax is a major benefit for TypeScript purists.
+However, avoiding a custom schema syntax is a major benefit for TypeScript purists.
 
 ---
 
@@ -187,18 +180,16 @@ However avoiding a custom schema syntax is a major benefit for TypeScript purist
 
 **Prisma** excels at handling complex relations automatically with
 
-\`prisma.user.findMany({ include: { posts: true } })\`. 
+\`prisma.user.findMany({ include: { posts: true } })\`.
 
-You don't have to write manual joins. 
+You don't have to write manual joins.
 
-But when you need custom SQL queries or window functions, 
-
+But when you need custom SQL queries or window functions,
 Prisma restricts you to its built-in API.
 
-This is where the **Drizzle** shines up when you need raw SQL control while retaining complete type safety.
+This is where **Drizzle** shines when you need raw SQL control while retaining complete type safety.
 
-You can query using \`db.query\` for relational models 
-
+You can query using \`db.query\` for relational models
 or use raw SQL builders (\`db.select().from(...)\`) for maximum query precision.
 
 ---
@@ -207,17 +198,15 @@ or use raw SQL builders (\`db.select().from(...)\`) for maximum query precision.
 
 This is where the architectural split becomes obvious.
 
-Prisma compiles queries through a Rust query engine binary. 
+Prisma compiles queries through a Rust query engine binary.
 
-In traditional Node servers, it works great. 
+In traditional Node servers, it works great.
 
 But in serverless environments (Vercel, AWS Lambda, Cloudflare Workers), that binary footprint can add noticeable cold start latency.
 
-Your vercel app might become more slower because of it's cold start nature.
+Your Vercel app might become slower because of its cold start nature.
 
-Whereas
-
-Drizzle is designed for speed. 
+Whereas Drizzle is designed for speed.
 
 It creates a paper-thin abstraction layer over native database drivers.
 
@@ -225,9 +214,7 @@ Zero binary overhead means cold starts are virtually instant.
 
 ![Performance Stats](/learnings/prisma-drizzle/stats.png)
 
-For example: You can visit thier [Benchmarks](https://orm.drizzle.team/benchmarks) page for more clarity on how they have optimised it.
-
-
+For example, you can visit their [Benchmarks](https://orm.drizzle.team/benchmarks) page for more clarity on how they have optimized it.
 
 ## 5. Type Safety
 
@@ -249,11 +236,9 @@ Both libraries provide top-tier TypeScript support, but their implementations di
 | **Type Safety** | Code-generated (\`prisma generate\`) | Inferred directly from TypeScript |
 | **Setup Experience** | Super easy (\`npx prisma init\`) | Manual driver & client setup |
 
-
-
 ## Final Verdict
 
-Ultimately, Prisma is the **easier** tool for getting started fast, while Drizzle is the **flexible** and **high-performance** tool for long-term control. 
+Ultimately, Prisma is the **easier** tool for getting started fast, while Drizzle is the **flexible** and **high-performance** tool for long-term control.
 
 Pick the right tool for your latency requirements and ship.
 
@@ -270,53 +255,41 @@ Pick the right tool for your latency requirements and ship.
 		content: `
 
 ## Problem
-        I launched my project [Distribution Engine](https://engine.theadroitdev.com)  recently 
-		
-		and I was expecting a lot of traction 
-		
-		because I had been working on it for a while and I was very excited to share it with the world.
-         It got 4 likes . 
+I launched my project [Distribution Engine](https://engine.theadroitdev.com) recently and I was expecting a lot of traction because I had been working on it for a while and I was very excited to share it with the world. 
 
+It got 4 likes.
 
-  And honestly, 
-  
-  that taught me more about distribution than any marketing thread I've read.
+And honestly, that taught me more about distribution than any marketing thread I've read.
 
+Just like optimization is not a day one job, distribution is just like that.
 
-  Just like optimization is not a day one job distribution is just like that.
+It's not something you create a launch post and boom you got users.
 
-  It's not something you create a launch post and boom you got users
+Well that's not that case because distribution is won through consistency and persistence.
 
-  Well that's not that case because distribution is won through consistency and persistence.
+And to do that you must be patient and welcome criticism.
 
-  And to do that you must have to be very patient and and have to welcome criticism. 
-  
-  Don't worry if users are not there
+Don't worry if users are not there.
 
-  Don't worry if visitors are not coming
+Don't worry if visitors are not coming.
 
-  Don't worry if they are not making purchasing.
+Don't worry if they are not making purchases.
 
 ## Solution
 
-  How to deal with it?
+How to deal with it?
 
-  > Data.
+> Data.
 
-  Analyze what people want,
-  
-what's their actual pain point, 
-  
-  and differentiate that with you are solving. 
+Analyze what people want,
+what's their actual pain point,
+and differentiate that from what you are solving.
 
-  Gather Feedback, 
-  
-  solve it.
+Gather feedback,
+solve it,
+repeat forever.
 
-  Repeat Forever.
-
-  That is the entire method.
-          
-        `
-	}
-];
+That is the entire method.
+`,
+	},
+].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
