@@ -1,23 +1,23 @@
 export interface Learning {
-  title: string;
-  slug: string;
-  summary: string;
-  date: string;
-  readTime?: string;
-  tags?: string[];
-  thumbnail?: string;
-  content: string;
+	title: string;
+	slug: string;
+	summary: string;
+	date: string;
+	readTime?: string;
+	tags?: string[];
+	thumbnail?: string;
+	content: string;
 }
 
 export const learnings: Learning[] = [
-  {
-    title: "Why I'm Choosing Vertical Slice Architecture",
-    slug: "vertical-slice-architecture",
-    summary:
-      "After building with MVC, Factory patterns, and Clean Architecture, here is why Vertical Slice Architecture (VSA)",
-    date: "2026-08-17",
-    thumbnail: "/learnings/vertical-slice-architecture/thumbnail.png",
-    content: `
+	{
+		title: "Why I'm Choosing Vertical Slice Architecture",
+		slug: "vertical-slice-architecture",
+		summary:
+			"After building with MVC, Factory patterns, and Clean Architecture, here is why Vertical Slice Architecture (VSA)",
+		date: "2026-08-17",
+		thumbnail: "/learnings/vertical-slice-architecture/thumbnail.png",
+		content: `
 
 
 I've built with almost every common architecture pattern:
@@ -114,15 +114,15 @@ Keep features isolated, avoid premature abstraction, and ship fast.
 
 > Thank you for reading 💖
 `,
-  },
-  {
-    title: "Prisma vs Drizzle: Raw Developer Take",
-    slug: "prisma-vs-drizzle",
-    summary:
-      "A raw, unvarnished comparison of Prisma vs Drizzle on setup, schema DX, query control, serverless cold starts, type safety, and a clear decision matrix.",
-    date: "2026-08-13",
-    thumbnail: "/learnings/prisma-drizzle/thumbnail.png",
-    content: `
+	},
+	{
+		title: "Prisma vs Drizzle: Raw Developer Take",
+		slug: "prisma-vs-drizzle",
+		summary:
+			"A raw, unvarnished comparison of Prisma vs Drizzle on setup, schema DX, query control, serverless cold starts, type safety, and a clear decision matrix.",
+		date: "2026-08-13",
+		thumbnail: "/learnings/prisma-drizzle/thumbnail.png",
+		content: `
 
 > Prisma is the "easier" tool. Drizzle is the "flexible" and "high-performance" tool.
 
@@ -259,5 +259,64 @@ Pick the right tool for your latency requirements and ship.
 
 > Thank you for reading 💖
 `,
-  },
+	},
+	{
+		title: "Why Launch Posts Do Not Guarantee Distribution",
+		slug: "why-launch-posts-do-not-guarantee-distribution",
+		summary:
+			"Shipping code is just the start. A recent project launch of mine pulled in only four likes. That quiet reality check proved distribution is a long game built on consistency, patience, and handling feedback. Analyze the data, fix the pain points, and iterate forever.",
+		date: "2026-08-13",
+		thumbnail: "/learnings/distribution/thumbnail.png",
+		content: `
+
+## Problem
+        I launched my project [Distribution Engine](https://engine.theadroitdev.com)  recently 
+		
+		and I was expecting a lot of traction 
+		
+		because I had been working on it for a while and I was very excited to share it with the world.
+         It got 4 likes . 
+
+
+  And honestly, 
+  
+  that taught me more about distribution than any marketing thread I've read.
+
+
+  Just like optimization is not a day one job distribution is just like that.
+
+  It's not something you create a launch post and boom you got users
+
+  Well that's not that case because distribution is won through consistency and persistence.
+
+  And to do that you must have to be very patient and and have to welcome criticism. 
+  
+  Don't worry if users are not there
+
+  Don't worry if visitors are not coming
+
+  Don't worry if they are not making purchasing.
+
+## Solution
+
+  How to deal with it?
+
+  > Data.
+
+  Analyze what people want,
+  
+what's their actual pain point, 
+  
+  and differentiate that with you are solving. 
+
+  Gather Feedback, 
+  
+  solve it.
+
+  Repeat Forever.
+
+  That is the entire method.
+          
+        `
+	}
 ];
