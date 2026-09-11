@@ -44,7 +44,7 @@ export default function LearningsListPage() {
                   Quick Learnings
                 </h1>
               </div>
-              <p className="text-sm text-muted-foreground">
+              <p className="text-md text-muted-foreground">
                 Raw technical takes, architectural comparisons, and fast notes.
               </p>
             </div>
