@@ -25,4 +25,11 @@ export const INSTANTS: Instant[] = [
     caption: "Writing my learning through launch post of Distribution Engine.",
     createdAt: new Date().toISOString(),
   },
+  {
+    id: "3",
+    title: "Learning Vectorless RAG",
+    image: "/instants/vectorlessrag.png",
+    caption: "Brainstorming with Vectorless RAG",
+    createdAt: new Date().toISOString(),
+  },
 ];
