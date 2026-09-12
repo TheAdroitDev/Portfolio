@@ -20,16 +20,16 @@ export const INSTANTS: Instant[] = [
   },
   {
     id: "2",
-    title: "Why Launch Posts Do Not Guarantee Distribution",
-    image: "/instants/ds-problem.png",
-    caption: "Writing my learning through launch post of Distribution Engine.",
+    title: "Learning Vectorless RAG",
+    image: "/instants/vectorlessrag.png",
+    caption: "Brainstorming with Vectorless RAG",
     createdAt: new Date().toISOString(),
   },
   {
     id: "3",
-    title: "Learning Vectorless RAG",
-    image: "/instants/vectorlessrag.png",
-    caption: "Brainstorming with Vectorless RAG",
+    title: "Purchased VPS 😍",
+    image: "/instants/vps.png",
+    caption: "Excited about my new VPS! Will post my learnings soon.",
     createdAt: new Date().toISOString(),
   },
 ];
