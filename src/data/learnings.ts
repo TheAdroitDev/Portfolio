@@ -253,8 +253,8 @@ Pick the right tool for your latency requirements and ship.
 		date: "2026-09-09",
 		thumbnail: "/learnings/distribution/thumbnail.png",
 		content: `
-
-## Problem
+		
+		## Problem
 I launched my project [Distribution Engine](https://engine.theadroitdev.com) recently and I was expecting a lot of traction because I had been working on it for a while and I was very excited to share it with the world. 
 
 It got 4 likes.
@@ -292,4 +292,83 @@ repeat forever.
 That is the entire method.
 `,
 	},
+	{
+		title: "How to get users",
+		slug: "how-to-get-users",
+		summary:
+			"There are only two real ways to get users -  solve a painful problem or deliver genuine value.",
+		date: "2026-09-15",
+		thumbnail: "/learnings/users/thumbnail.png",
+		content: `
+	
+		How to get users?
+
+There are only two ways to attract users. 
+
+## 1. Solve a problem.
+
+Find a pain point and fix it. 
+
+Doesn't matter if it's your own problem or someone else's.
+
+Your own problem is easier because you already understand it deeply you're your first user.
+
+Someone else's problem means you have to go talk to people, watch how they work, ask what's annoying them. 
+
+Either way, the rule is the same: real pain beats a nice-to-have every time. 
+
+> People pay to make pain go away way faster than they pay for something "cool."
+
+## 2. Provide enough value.
+
+Even something simple ~a free tool, a useful post, a template, a small feature 
+
+if it gives people decent value, nobody can stop you from getting users. 
+
+No permission needed. No approval needed. Just put it out there.
+
+And here's the natural next step: once people are getting value from you for free, some percentage of them will happily pay for more. 
+
+That's the whole game of turning free users into paying customers. 
+
+You don't have to force it 
+
+You just have to make the free thing genuinely useful first.
+
+## So what's the best option?
+
+Is anyone stopping you from doing both? solving a real problem AND giving away enough free value to pull people in?
+
+No. Nobody's stopping you. 
+
+So do both. 
+
+Don't pick one and ignore the other.
+
+One tip: market and distribute aggressively.
+
+Don't sit quietly and wait for people to find you. 
+
+Post it. 
+
+Share it. 
+
+DM people. 
+
+Put it in every group, forum, and comment section where it's relevant. 
+
+> Being "too much" about your own work is rarely the actual problem; being invisible is.
+
+## Bonus: 
+
+If you actually do the two things above solve something real, give real value people start doing the distribution for you. 
+
+They share it because it helped them, not because you asked.
+
+That's the cheapest, most powerful marketing there is. 
+
+Word of mouth from someone who genuinely got value costs you nothing and converts better than any ad.
+
+All the best :)
+	`}
 ].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
