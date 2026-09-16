@@ -286,7 +286,7 @@ export function Projects() {
         <h2 className="text-lg font-semibold tracking-tight text-foreground">
           My Brainchildren
         </h2>
-        <p className="mt-1 text-sm text-muted-foreground">
+        <p className="mt-1 text-md text-muted-foreground">
          A selection of ideas I've brought to life.
         </p>
       </motion.div>
