@@ -7,8 +7,6 @@ export interface Instant {
   createdAt: string; // ISO Date String
 }
 
-const now = Date.now();
-const hour = 60 * 60 * 1000;
 
 export const INSTANTS: Instant[] = [
   {
@@ -20,16 +18,16 @@ export const INSTANTS: Instant[] = [
   },
   {
     id: "2",
-    title: "Learning Vectorless RAG",
-    image: "/instants/vectorlessrag.png",
-    caption: "Brainstorming with Vectorless RAG",
+    title: "How to get users",
+    image: "/instants/users.png",
+    caption: "New writing is out: on how to get users and win.",
     createdAt: new Date().toISOString(),
   },
   {
     id: "3",
-    title: "Purchased VPS 😍",
-    image: "/instants/vps.png",
-    caption: "Excited about my new VPS! Will post my learnings soon.",
+    title: "Spiked the VPS",
+    image: "/instants/spike.png",
+    caption: "Lol found out pm2 was running from last 7 days",
     createdAt: new Date().toISOString(),
   },
 ];
