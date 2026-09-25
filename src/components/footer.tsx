@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Bug } from "lucide-react";
+import { Quote } from "@/components/quote";
 
 const navigationLinks = [
   { label: "Home", href: "/" },
@@ -28,6 +29,11 @@ export function Footer() {
             </Link>
           ))}
         </div>
+      </div>
+
+      {/* Quote under Navigate Section */}
+      <div className="mb-8">
+        <Quote />
       </div>
 
       <div className="w-12 h-px bg-border/40 mx-auto mb-6" />
