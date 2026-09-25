@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Script from "next/script";
-import { Inter, Schibsted_Grotesk, Baloo_Bhaijaan_2, Instrument_Serif, Caveat } from "next/font/google";
+import { Inter, Schibsted_Grotesk, Baloo_Bhaijaan_2, Instrument_Serif, Caveat, Cormorant_Garamond } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
 import "./globals.css";
 import { cn } from "@/lib/utils";
@@ -32,6 +32,12 @@ const caveat = Caveat({
   variable: "--font-caveat",
 });
 
+const cormorantGaramond = Cormorant_Garamond({
+  subsets: ["latin"],
+  weight: ["600"],
+  variable: "--font-cormorant",
+});
+
 export const metadata: Metadata = {
   title: "Shivam Verma | Software Engineer",
   description:
@@ -57,7 +63,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={cn(inter.variable, schibstedGrotesk.variable, baloo.variable, instrumentSerif.variable, caveat.variable, "font-sans")}
+      className={cn(inter.variable, schibstedGrotesk.variable, baloo.variable, instrumentSerif.variable, caveat.variable, cormorantGaramond.variable, "font-sans")}
       suppressHydrationWarning
     >
       <body className="min-h-screen bg-background text-foreground antialiased">
