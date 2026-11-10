@@ -24,7 +24,7 @@ export default function Home() {
           </div>
 
           {/* Separator */}
-          <hr className="border-dashed border-border/15" />
+          <hr className="border-dashed border-border/15 !mt-3" />
 
           {/* Projects */}
           <Projects />
