@@ -388,13 +388,16 @@ export function Projects() {
               ref={ref}
               className="w-full max-w-125 h-full md:h-fit md:max-h-[90%] flex flex-col bg-card sm:rounded-3xl overflow-hidden"
             >
-              <motion.div layoutId={`image-${active.title}-${id}`}>
+              <motion.div
+                layoutId={`image-${active.title}-${id}`}
+                className="relative w-full h-72 lg:h-80 shrink-0"
+              >
                 <Image
                   src={active.thumbnail}
                   alt={active.title}
-                  width={500}
-                  height={300}
-                  className="w-full h-72 lg:h-80 sm:rounded-tr-lg sm:rounded-tl-lg object-cover object-top"
+                  fill
+                  sizes="500px"
+                  className="sm:rounded-tr-lg sm:rounded-tl-lg object-cover object-top"
                 />
               </motion.div>
 
@@ -528,13 +531,17 @@ export function Projects() {
               className="p-4 flex flex-col hover:bg-muted/50 rounded-xl cursor-pointer"
             >
               <div className="flex gap-4 flex-col w-full">
-                <motion.div layoutId={`image-${project.title}-${id}`}>
+                <motion.div
+                  layoutId={`image-${project.title}-${id}`}
+                  className="relative h-72 w-full"
+                >
                   <Image
                     src={project.thumbnail}
                     alt={project.title}
-                    width={400}
-                    height={225}
-                    className="h-72 w-full rounded-lg object-cover object-top"
+                    fill
+                    sizes="(max-width: 768px) 100vw, 360px"
+                    loading="eager"
+                    className="rounded-lg object-cover object-top"
                   />
                 </motion.div>
                 <div className="flex flex-col gap-1">
