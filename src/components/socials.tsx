@@ -58,11 +58,20 @@ const item = {
 };
 
 export function Socials() {
+  const handleSeeFreelanceWork = () => {
+    const target = document.getElementById("projects");
+    if (target) {
+      target.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+    window.dispatchEvent(new CustomEvent("switch-project-tab", { detail: "freelance" }));
+  };
+
   return (
     <motion.section
       initial={{ opacity: 0, y: 16 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: 0.15, ease: "easeOut" }}
+      className="space-y-3.5"
     >
       <TooltipProvider delay={100}>
         <motion.div
@@ -104,6 +113,23 @@ export function Socials() {
           })}
         </motion.div>
       </TooltipProvider>
+
+      {/* Freelance & Collaboration Text CTA */}
+      <motion.p
+        initial={{ opacity: 0, y: 8 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4, delay: 0.25, ease: "easeOut" }}
+        className="text-[15px] leading-relaxed text-foreground/90 pt-3"
+      >
+        Helped a D2C brand hit ₹6L+/month.{" "}
+        <button
+          type="button"
+          onClick={handleSeeFreelanceWork}
+          className="font-medium text-foreground transition-colors duration-200 hover:text-foreground/60 cursor-pointer"
+        >
+          Yours next?
+        </button>
+      </motion.p>
     </motion.section>
   );
 }
