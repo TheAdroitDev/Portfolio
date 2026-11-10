@@ -12,8 +12,9 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { cn } from "@/lib/utils";
 import { useOutsideClick } from "@/hooks/use-outside-click";
-import { projects, type Project } from "@/data/projects";
+import { projects, freelanceProjects, type Project } from "@/data/projects";
 
 /* ── Tech Icons ──────────────────────────────── */
 
@@ -207,6 +208,12 @@ const projectDetails: Record<string, string> = {
     "WisePoll was built to solve the complexities of real-time polling. The core features include poll creation with multiple single-choice questions, mandatory/optional flags, and customizable settings.\n\nRespondents can vote either anonymously or via authentication. An expiry system ensures polls automatically close, rejecting further responses. Public share links allow respondents to answer directly.\n\nLive analytics update in real-time via WebSocket (Socket.io). The dashboard features visual per-question breakdowns with option counts, percentages, and bar charts. Everything is wrapped in a responsive, dark/light theme inspired by Loid with a sage-green palette.",
   AnimeKun:
     "AnimeKun is your ultimate anime discovery and tracking platform. Currently in active development, it aims to provide an incredibly fast, seamless, and visually rich experience for making your anime journey to a different level.",
+  "Jai Builders":
+    "Jai Builders is a construction and architecture firm specializing in modern residential builds and dream home construction.\n\nBuilt a high-converting, mobile-first frontend experience tailored to display architectural blueprints, past residential project milestones, and client inquiries. Focused on rich imagery presentation, lightning-fast load times, and intuitive lead generation forms to convert prospective homeowners into clients.",
+  "Musky Snacks":
+    "Musky Snacks is a rapidly growing D2C healthy snacking brand specializing in artisanal roasted and flavored makhanas (fox nuts).\n\nEngineered a sleek, engaging brand showcase that helped drive over ₹6 Lakhs in monthly turnover. Optimized for visual flavor storytelling, smooth scroll micro-interactions, mobile-first responsiveness, and frictionless distributor & retail inquiries without bloated e-commerce overhead.",
+  "Vastu Mentor":
+    "Vastu Mentor is an all-in-one digital platform combining personalized Vedic consultation bookings with a specialized spiritual e-commerce storefront.\n\nFeatures an automated appointment scheduling system for client consultations alongside an e-commerce catalog offering certified energizing crystals, brass sculptures, and Vastu remedies. Engineered with a secure payment & billing pipeline, order fulfillment workflows, and an intuitive custom admin panel for managing bookings, catalog inventory, and sales analytics.",
 };
 
 const statusConfig: Record<string, string> = {
@@ -253,8 +260,20 @@ function GithubStars({ url }: { url: string }) {
 
 export function Projects() {
   const [active, setActive] = useState<Project | boolean | null>(null);
+  const [activeTab, setActiveTab] = useState<"brainchildren" | "freelance">("brainchildren");
   const id = useId();
   const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function onSwitchTab(e: Event) {
+      const customEvent = e as CustomEvent<"brainchildren" | "freelance">;
+      if (customEvent.detail) {
+        setActiveTab(customEvent.detail);
+      }
+    }
+    window.addEventListener("switch-project-tab", onSwitchTab);
+    return () => window.removeEventListener("switch-project-tab", onSwitchTab);
+  }, []);
 
   useEffect(() => {
     function onKeyDown(event: KeyboardEvent) {
@@ -275,20 +294,66 @@ export function Projects() {
 
   useOutsideClick(ref, () => setActive(null));
 
+  const currentProjects = activeTab === "brainchildren" ? projects : freelanceProjects;
+
   return (
-    <section id="projects" className="space-y-6">
+    <section id="projects" className="space-y-6 scroll-mt-20 !mt-12">
       <motion.div
         initial={{ opacity: 0, y: 16 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.4, ease: "easeOut" }}
+        className="flex flex-col sm:flex-row sm:items-end justify-between gap-4"
       >
-        <h2 className="text-lg font-semibold tracking-tight text-foreground">
-          My Brainchildren
-        </h2>
-        <p className="mt-1 text-md text-muted-foreground">
-         A selection of ideas I've brought to life.
-        </p>
+        <div>
+          <h2 className="text-lg font-semibold tracking-tight text-foreground">
+            {activeTab === "brainchildren" ? "My Brainchildren" : "Freelance & Client Work"}
+          </h2>
+          <p className="mt-1 text-md text-muted-foreground">
+            {activeTab === "brainchildren"
+              ? "A selection of ideas I've brought to life."
+              : "Client systems, MVPs, and contract engineering built to scale."}
+          </p>
+        </div>
+
+        {/* Segmented Toggle — Clean & Borderless */}
+        <div className="inline-flex self-start sm:self-auto items-center rounded-xl bg-neutral-200/70 dark:bg-neutral-900/90 p-1 text-xs select-none shadow-[inset_0_1px_2px_rgba(0,0,0,0.06)] dark:shadow-[inset_0_1px_2px_rgba(0,0,0,0.5)]">
+          <button
+            type="button"
+            onClick={() => setActiveTab("brainchildren")}
+            className={cn(
+              "relative rounded-lg px-3.5 py-1.5 font-medium transition-colors cursor-pointer select-none",
+              activeTab === "brainchildren" ? "text-foreground" : "text-muted-foreground hover:text-foreground"
+            )}
+          >
+            {activeTab === "brainchildren" && (
+              <motion.span
+                layoutId="project-tab-pill"
+                className="absolute inset-0 rounded-lg bg-white dark:bg-neutral-800 shadow-[0_1px_3px_rgba(0,0,0,0.1),0_1px_2px_rgba(0,0,0,0.06)] dark:shadow-[0_2px_6px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.08)]"
+                transition={{ type: "spring", bounce: 0.2, duration: 0.4 }}
+              />
+            )}
+            <span className="relative z-10">Brainchildren</span>
+          </button>
+
+          <button
+            type="button"
+            onClick={() => setActiveTab("freelance")}
+            className={cn(
+              "relative rounded-lg px-3.5 py-1.5 font-medium transition-colors cursor-pointer select-none",
+              activeTab === "freelance" ? "text-foreground" : "text-muted-foreground hover:text-foreground"
+            )}
+          >
+            {activeTab === "freelance" && (
+              <motion.span
+                layoutId="project-tab-pill"
+                className="absolute inset-0 rounded-lg bg-white dark:bg-neutral-800 shadow-[0_1px_3px_rgba(0,0,0,0.1),0_1px_2px_rgba(0,0,0,0.06)] dark:shadow-[0_2px_6px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.08)]"
+                transition={{ type: "spring", bounce: 0.2, duration: 0.4 }}
+              />
+            )}
+            <span className="relative z-10">Freelance</span>
+          </button>
+        </div>
       </motion.div>
 
       {/* Backdrop overlay — exact Aceternity pattern */}
@@ -446,60 +511,69 @@ export function Projects() {
       </AnimatePresence>
 
       {/* Grid — exact Aceternity pattern */}
-      <ul className="w-full grid grid-cols-1 md:grid-cols-2 items-start gap-4">
-        {projects.map((project, index) => (
-          <motion.div
-            layoutId={`card-${project.title}-${id}`}
-            key={project.title}
-            onClick={() => setActive(project)}
-            className="p-4 flex flex-col hover:bg-muted/50 rounded-xl cursor-pointer"
-          >
-            <div className="flex gap-4 flex-col w-full">
-              <motion.div layoutId={`image-${project.title}-${id}`}>
-                <Image
-                  src={project.thumbnail}
-                  alt={project.title}
-                  width={400}
-                  height={225}
-                  className="h-72 w-full rounded-lg object-cover object-top"
-                />
-              </motion.div>
-              <div className="flex flex-col gap-1">
-                <div className="flex items-center gap-3">
-                  <motion.h3
-                    layoutId={`title-${project.title}-${id}`}
-                    className="font-semibold text-foreground text-base"
-                  >
-                    {project.title}
-                  </motion.h3>
-                  {project.githubUrl && <GithubStars url={project.githubUrl} />}
-                </div>
-                <motion.p
-                  layoutId={`description-${project.description}-${id}`}
-                  className="text-muted-foreground text-sm line-clamp-1"
-                >
-                  {project.description}
-                </motion.p>
-                <div className="mt-1">
-                  {index === 0 ? (
-                    <SparklesText
-                      className="text-[13px] font-medium"
-                      sparklesCount={5}
-                      palette={["#10b981", "#3b82f6", "#f59e0b", "#a855f7", "#ec4899", "#34d399"]}
+      <AnimatePresence mode="wait">
+        <motion.ul
+          key={activeTab}
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -8 }}
+          transition={{ duration: 0.25, ease: "easeOut" }}
+          className="w-full grid grid-cols-1 md:grid-cols-2 items-start gap-4"
+        >
+          {currentProjects.map((project, index) => (
+            <motion.div
+              layoutId={`card-${project.title}-${id}`}
+              key={project.title}
+              onClick={() => setActive(project)}
+              className="p-4 flex flex-col hover:bg-muted/50 rounded-xl cursor-pointer"
+            >
+              <div className="flex gap-4 flex-col w-full">
+                <motion.div layoutId={`image-${project.title}-${id}`}>
+                  <Image
+                    src={project.thumbnail}
+                    alt={project.title}
+                    width={400}
+                    height={225}
+                    className="h-72 w-full rounded-lg object-cover object-top"
+                  />
+                </motion.div>
+                <div className="flex flex-col gap-1">
+                  <div className="flex items-center gap-3">
+                    <motion.h3
+                      layoutId={`title-${project.title}-${id}`}
+                      className="font-semibold text-foreground text-base"
                     >
-                      New and Live
-                    </SparklesText>
-                  ) : (
-                    <span className="text-[13px] font-medium text-muted-foreground">
-                      {statusConfig[project.status]}
-                    </span>
-                  )}
+                      {project.title}
+                    </motion.h3>
+                    {project.githubUrl && <GithubStars url={project.githubUrl} />}
+                  </div>
+                  <motion.p
+                    layoutId={`description-${project.description}-${id}`}
+                    className="text-muted-foreground text-sm line-clamp-1"
+                  >
+                    {project.description}
+                  </motion.p>
+                  <div className="mt-1 flex items-center justify-between gap-2">
+                    {activeTab === "brainchildren" && index === 0 ? (
+                      <SparklesText
+                        className="text-[13px] font-medium"
+                        sparklesCount={5}
+                        palette={["#10b981", "#3b82f6", "#f59e0b", "#a855f7", "#ec4899", "#34d399"]}
+                      >
+                        New and Live
+                      </SparklesText>
+                    ) : (
+                      <span className="text-[13px] font-medium text-muted-foreground">
+                        {statusConfig[project.status]}
+                      </span>
+                    )}
+                  </div>
                 </div>
               </div>
-            </div>
-          </motion.div>
-        ))}
-      </ul>
+            </motion.div>
+          ))}
+        </motion.ul>
+      </AnimatePresence>
     </section>
   );
 }
