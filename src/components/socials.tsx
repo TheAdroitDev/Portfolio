@@ -1,6 +1,8 @@
 "use client";
 
+import { useEffect } from "react";
 import { motion } from "framer-motion";
+import { getCalApi } from "@calcom/embed-react";
 import {
   Tooltip,
   TooltipContent,
@@ -58,13 +60,13 @@ const item = {
 };
 
 export function Socials() {
-  const handleSeeFreelanceWork = () => {
-    const target = document.getElementById("projects");
-    if (target) {
-      target.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
-    window.dispatchEvent(new CustomEvent("switch-project-tab", { detail: "freelance" }));
-  };
+  // Cal.com booking popup
+  useEffect(() => {
+    (async () => {
+      const cal = await getCalApi({ namespace: "book-a-call" });
+      cal("ui", { hideEventTypeDetails: false, layout: "month_view" });
+    })();
+  }, []);
 
   return (
     <motion.section
@@ -124,7 +126,9 @@ export function Socials() {
         Helped a D2C brand hit ₹6L+/month.{" "}
         <button
           type="button"
-          onClick={handleSeeFreelanceWork}
+          data-cal-namespace="book-a-call"
+          data-cal-link="theadroitdev"
+          data-cal-config='{"layout":"month_view"}'
           className="font-medium text-foreground transition-colors duration-200 hover:text-foreground/60 cursor-pointer"
         >
           Yours next?
