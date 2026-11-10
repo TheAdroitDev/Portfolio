@@ -6,6 +6,7 @@ export interface Project {
     liveUrl?: string;
     techStack: string[];
     status: "live" | "building" | "coming-soon";
+    client?: string;
 }
 
 export const projects: Project[] = [
@@ -59,5 +60,50 @@ export const projects: Project[] = [
             "Tailwind CSS"
         ],
         status: "building",
+    },
+];
+
+export const freelanceProjects: Project[] = [
+    {
+        title: "Vastu Mentor",
+        description: "Full-stack e-commerce and consultation booking platform featuring crystal & remedy stores, automated billing pipeline, and custom admin dashboard.",
+        thumbnail: "/works/vm.png",
+        liveUrl: "https://vastmentor.com",
+        techStack: [
+            "Next.js",
+            "TypeScript",
+            "Tailwind CSS",
+            "Node.js",
+            "PostgreSQL",
+            "Stripe",
+            "Zod"
+        ],
+        status: "live",
+    },
+    {
+        title: "Musky Snacks",
+        description: "Vibrant product showcase and brand presence for a fast-scaling D2C healthy snacking brand with ₹6L+ monthly turnover, featuring flavoured makhanas.",
+        thumbnail: "/works/ms.png",
+        liveUrl: "https://muskysnax.in",
+        techStack: [
+            "React",
+            "TypeScript",
+            "Tailwind CSS",
+            "Vite",
+            "Node.js"
+        ],
+        status: "live",
+    },
+    {
+        title: "Jai Builders",
+        description: "Modern showcase & portfolio platform built for a premier residential construction firm, featuring architectural home designs and floorplans.",
+        thumbnail: "/works/jbs.png",
+        liveUrl: "https://jaibuilders.online",
+        techStack: [
+            "Next.js",
+            "TypeScript",
+            "Tailwind CSS"
+        ],
+        status: "live",
     },
 ];
