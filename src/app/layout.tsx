@@ -100,13 +100,6 @@ const rootJsonLd = {
       author: { "@id": `${site.url}/#person` },
       publisher: { "@id": `${site.url}/#person` },
     },
-    {
-      "@type": "ProfilePage",
-      "@id": `${site.url}/#profile`,
-      url: site.url,
-      name: site.title,
-      mainEntity: { "@id": `${site.url}/#person` },
-    },
   ],
 };
 
