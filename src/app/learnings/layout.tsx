@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   description:
     "Short, opinionated learnings by Shivam Verma on architecture, ORMs, distribution, getting users and building products.",
   alternates: { canonical: "/learnings" },
-  openGraph: { url: "/learnings", title: "Learnings | Shivam Verma", description: "Short, opinionated learnings by Shivam Verma on architecture, ORMs, distribution, getting users and building products." },
+  openGraph: { url: "/learnings", images: [{ url: "/home.png", width: 1630, height: 730 }], title: "Learnings | Shivam Verma", description: "Short, opinionated learnings by Shivam Verma on architecture, ORMs, distribution, getting users and building products." },
 };
 
 export default function Layout({ children }: { children: React.ReactNode }) {
