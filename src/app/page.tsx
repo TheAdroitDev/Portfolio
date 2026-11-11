@@ -8,11 +8,26 @@ import { Blogs } from "@/components/blogs";
 import { Learnings } from "@/components/learnings";
 import { Footer } from "@/components/footer";
 import { ProgressiveBlur } from "@/components/ui/progressive-blur";
+import { site, jsonLd } from "@/lib/site";
+
+// ProfilePage schema belongs to the home page only
+const profileJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "ProfilePage",
+  "@id": `${site.url}/#profile`,
+  url: site.url,
+  name: site.title,
+  mainEntity: { "@id": `${site.url}/#person` },
+};
 
 export default function Home() {
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: jsonLd(profileJsonLd) }}
+      />
       <Navbar />
       <main className="mx-auto w-full max-w-3xl px-6 pb-24 pt-10">
         <div className="space-y-16">
