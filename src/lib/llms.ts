@@ -33,7 +33,7 @@ function header() {
     "## Projects",
     "",
     ...projects.map(
-      (p) => `- [${p.title}](${p.liveUrl ?? p.githubUrl ?? site.url}): ${p.description} (${p.status}; ${p.techStack.join(", ")})`
+      (p) => `- [${p.title}](${p.liveUrl ?? p.plannedUrl ?? p.githubUrl ?? site.url}): ${p.description} (${p.status}; ${p.techStack.join(", ")})`
     ),
     "",
     "## Freelance & client work",
