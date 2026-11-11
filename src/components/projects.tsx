@@ -380,6 +380,7 @@ export function Projects() {
               exit={{ opacity: 0, transition: { duration: 0.05 } }}
               className="flex absolute top-2 right-2 lg:hidden items-center justify-center bg-background rounded-full h-6 w-6"
               onClick={() => setActive(null)}
+              aria-label="Close project"
             >
               <CloseIcon />
             </motion.button>
@@ -431,6 +432,7 @@ export function Projects() {
                         href={active.githubUrl}
                         target="_blank"
                         rel="noopener noreferrer"
+                        aria-label={`View ${active.title} on GitHub`}
                         className="inline-flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground"
                       >
                         <GitHubIcon size={16} />
@@ -445,6 +447,7 @@ export function Projects() {
                         href={active.liveUrl}
                         target="_blank"
                         rel="noopener noreferrer"
+                        aria-label={`Visit ${active.title} live`}
                         className="inline-flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground"
                       >
                         <ExternalLink size={16} />
