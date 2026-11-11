@@ -4,6 +4,7 @@ import { Inter, Schibsted_Grotesk, Baloo_Bhaijaan_2, Instrument_Serif, Caveat, C
 import { ThemeProvider } from "@/components/theme-provider";
 import "./globals.css";
 import { cn } from "@/lib/utils";
+import { site, personSchema, jsonLd } from "@/lib/site";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -39,20 +40,74 @@ const cormorantGaramond = Cormorant_Garamond({
 });
 
 export const metadata: Metadata = {
-  title: "Shivam Verma | Software Engineer",
-  description:
-    "Software builder and fullstack developer crafting robust applications for the web and mobile. Explore my projects, blog, and open-source contributions.",
+  metadataBase: new URL(site.url),
+  title: {
+    default: site.title,
+    template: `%s | ${site.name}`,
+  },
+  description: site.description,
+  applicationName: site.name,
+  authors: [{ name: site.name, url: site.url }],
+  creator: site.name,
+  publisher: site.name,
+  keywords: site.keywords,
+  alternates: {
+    canonical: "/",
+    types: { "text/plain": "/llms.txt" },
+  },
   openGraph: {
-    title: "Shivam Verma | Software Engineer",
-    description:
-      "Software builder and fullstack developer crafting robust applications for the web and mobile.",
+    title: site.title,
+    description: site.description,
     type: "website",
-    url: "https://theadroitdev.com",
+    url: "/",
+    siteName: site.name,
+    locale: site.locale,
+    images: [{ url: site.ogImage, width: 1630, height: 730, alt: `${site.name}'s portfolio` }],
   },
   twitter: {
     card: "summary_large_image",
-    creator: "@theadroitdev",
+    title: site.title,
+    description: site.description,
+    creator: `@${site.handle}`,
+    site: `@${site.handle}`,
+    images: [site.ogImage],
   },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
+  category: "technology",
+};
+
+const rootJsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    personSchema,
+    {
+      "@type": "WebSite",
+      "@id": `${site.url}/#website`,
+      url: site.url,
+      name: site.name,
+      description: site.description,
+      inLanguage: "en",
+      author: { "@id": `${site.url}/#person` },
+      publisher: { "@id": `${site.url}/#person` },
+    },
+    {
+      "@type": "ProfilePage",
+      "@id": `${site.url}/#profile`,
+      url: site.url,
+      name: site.title,
+      mainEntity: { "@id": `${site.url}/#person` },
+    },
+  ],
 };
 
 export default function RootLayout({
@@ -67,6 +122,11 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body className="min-h-screen bg-background text-foreground antialiased">
+        {/* Structured data: Person + WebSite (SEO / AEO / GEO) */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: jsonLd(rootJsonLd) }}
+        />
         <Script
           defer
           src="https://cloud.umami.is/script.js"
