@@ -4,6 +4,8 @@ export interface Project {
     thumbnail: string;
     githubUrl?: string;
     liveUrl?: string;
+    /** Future URL of a project still in building. Only listed in llms.txt, never shown on the site. */
+    plannedUrl?: string;
     techStack: string[];
     status: "live" | "building" | "coming-soon";
     client?: string;
@@ -53,7 +55,7 @@ export const projects: Project[] = [
         title: "AnimeKun",
         description: "Your ultimate anime discovery and tracking platform. (Work in Progress)",
         thumbnail: "/projects/animekun2.png",
-        liveUrl: "https://animekun/",
+        plannedUrl: "https://animekun.app",
         techStack: [
             "Next.js",
             "TypeScript",
